@@ -2,6 +2,9 @@ const socket = io();
 socket.on("add-circle", (data) => {
   addCircle(data)
 })
+socket.on("clear-circles", () => {
+  circles.innerHTML = '';
+})
 
 const circles = document.getElementById('circles');
 let initials = '';
@@ -18,7 +21,8 @@ circles.addEventListener('click', function(evt) {
 });
 
 document.getElementsByTagName('button')[0].addEventListener('click', function() {
-  circles.innerHTML = '';
+  
+  socket.emit("clear-circles");
 });
 
 do {
