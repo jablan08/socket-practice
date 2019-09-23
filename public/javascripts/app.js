@@ -5,8 +5,13 @@ socket.on("add-circle", (data) => {
 socket.on("clear-circles", () => {
   circles.innerHTML = '';
 })
+socket.on('update-player-list', function (data) {
+  const playerList = '<li>' + data.join('</li><li>') + '</li>';
+  players.innerHTML = playerList;
+});
 
 const circles = document.getElementById('circles');
+const players = document.getElementById('players');
 let initials = '';
 
 circles.addEventListener('click', function(evt) {
@@ -28,6 +33,7 @@ document.getElementsByTagName('button')[0].addEventListener('click', function() 
 do {
   initials = getInitials();
 } while (initials.length < 2 || initials.length > 3);
+socket.emit('register-player', initials);
 
 function getInitials() {
   const input = prompt("Please enter your initials");
