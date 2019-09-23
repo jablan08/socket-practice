@@ -1,7 +1,10 @@
 const io = require("socket.io")();
 
 io.on("connection", function(socket) {
-  console.log("Client connected to socket.io!")
+  // socket represent the currently connecting browser
+  socket.on("add-circle", (data) => {
+    io.emit("add-circle", data);
+  });
 });
 
 module.exports = io;

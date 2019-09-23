@@ -1,5 +1,8 @@
-var circles = document.getElementById('circles');
-var initials = '';
+const socket = io();
+console.log(socket);
+
+const circles = document.getElementById('circles');
+let initials = '';
 
 circles.addEventListener('click', function(evt) {
   addCircle(evt.clientX, evt.clientY, randomBetween(10,125), getRandomRGBA());
@@ -14,12 +17,12 @@ do {
 } while (initials.length < 2 || initials.length > 3);
 
 function getInitials() {
-  var input = prompt("Please enter your initials");
+  const input = prompt("Please enter your initials");
   return input ? input.toUpperCase() : '';
 }
 
 function addCircle(x, y, dia, rgba) {
-  var el = document.createElement('div');
+  const el = document.createElement('div');
   el.style.left = x - Math.floor(dia / 2 + 0.5) + 'px';
   el.style.top = y - Math.floor(dia / 2 + 0.5) + 'px';
   el.style.width = el.style.height = dia + 'px';
@@ -41,5 +44,3 @@ function getRandomRGBA() {
     randomBetween(0, 255), ',', randomBetween(2, 10) / 10, ')'].join('');
 }
 
-var socket = io();
-console.log(socket);
