@@ -1,11 +1,20 @@
 const socket = io();
-console.log(socket);
+socket.on("add-circle", (data) => {
+  console.log(data)
+})
 
 const circles = document.getElementById('circles');
 let initials = '';
 
 circles.addEventListener('click', function(evt) {
-  addCircle(evt.clientX, evt.clientY, randomBetween(10,125), getRandomRGBA());
+  socket.emit("add-circle", {
+    initials,
+    x: evt.clientX,
+    y: evt.clientY,
+    dia: randomBetween(10,100),
+    rgba: getRandomRGBA()
+  });
+  // addCircle(evt.clientX, evt.clientY, randomBetween(10,125), getRandomRGBA());
 });
 
 document.getElementsByTagName('button')[0].addEventListener('click', function() {
