@@ -40,3 +40,6 @@ function getRandomRGBA() {
   return ['rgba(', randomBetween(0, 255), ',', randomBetween(0, 255), ',',
     randomBetween(0, 255), ',', randomBetween(2, 10) / 10, ')'].join('');
 }
+
+var socket = io();
+console.log(socket);

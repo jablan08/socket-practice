@@ -21,6 +21,8 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+const io = require("../io");
+io.attach(server);
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -89,10 +91,3 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-const io = require("socket.io")();
-
-io.on("connection", function(socket) {
-  console.log("Client connected to socket.io!")
-});
-
-module.exports = io;
